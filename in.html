@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Jasmine</title>
+    <style>
+        body {
+            background-color: #121212; /* Dark theme to match the vibe */
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            color: #ffffff;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        #container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: #1e1e1e;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        h1 { color: #ff4081; font-size: 1.8em; margin-top: 10px; }
+
+        .slideshow-container {
+            position: relative;
+            height: 450px;
+            margin: 20px 0;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .active { display: block; animation: fade 1.5s; }
+
+        @keyframes fade { from {opacity: .4} to {opacity: 1} }
+
+        p { line-height: 1.7; font-size: 1.05em; color: #e0e0e0; text-align: left; }
+
+        #music-btn {
+            background: #ff4081;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .heart {
+            position: fixed;
+            top: -10px;
+            font-size: 20px;
+            color: #ff4081;
+            user-select: none;
+            pointer-events: none;
+            z-index: 999;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall { to { transform: translateY(110vh); } }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <audio id="bdaySong" loop>
+            <source src="https://open.spotify.com/track/4jyyma8YdFC4S4llusSFRu?si=_llZBUECQH2O5OX2AwKp4w" type="audio/mpeg">
+        </audio>
+
+        <button id="music-btn" onclick="toggleMusic()">🎵 Press for Music</button>
+        
+        <h1>Happy 19th, Jasmine</h1>
+
+        <div class="slideshow-container">
+            <img src="Snapchat-928657247.jpg" class="slide active">
+            <img src="Snapchat-1696790904.jpg" class="slide">
+            <img src="Snapchat-1475538738.jpg" class="slide">
+        </div>
+
+        <p>
+            Hey, happy birthday.<br><br>
+            I honestly hope I'm the first to wish you. Even though things didn’t work out between us, I still want you to know I appreciate you a lot.<br><br>
+            What we had meant something to me, and I’ll always appreciate the memories, the laughs, and even the little things we shared. Distance made things hard, but it never changed the fact that you’re a good person who deserves happiness.<br><br>
+            I hope this new year of your life brings you peace, growth, and everything you’ve been working towards. You deserve love that feels easy, and a life that feels right.<br><br>
+            Take care of yourself and enjoy your day.<br><br>
+            <strong>Xoxo makumamutoffee❤️</strong>
+        </p>
+    </div>
+
+    <script>
+        // Music Function
+        function toggleMusic() {
+            const song = document.getElementById("bdaySong");
+            const btn = document.getElementById("music-btn");
+            if (song.paused) {
+                song.play();
+                btn.innerHTML = "⏸ Pause Music";
+            } else {
+                song.pause();
+                btn.innerHTML = "▶️ Resume Music";
+            }
+        }
+
+        // Slideshow Logic
+        let slideIndex = 0;
+        const slides = document.getElementsByClassName("slide");
+        
+        function showSlides() {
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove("active");
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}
+            slides[slideIndex-1].classList.add("active");
+            setTimeout(showSlides, 3500); 
+        }
+        showSlides();
+
+        // Falling Hearts
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.className = "heart";
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+        setInterval(createHeart, 400);
+    </script>
+</body>
+</html>
