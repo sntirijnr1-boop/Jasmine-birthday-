@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Jasmine</title>
+    <style>
+        :root {
+            --primary-pink: #ff2d95;
+            --soft-pink: #ff85c1;
+            --glass: rgba(15, 15, 15, 0.8);
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            background-color: #000;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* The Matrix Canvas */
+        #matrix {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        /* Main Layout */
+        .content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            animation: fadeIn 2s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header Style */
+        h1 {
+            font-size: 3rem;
+            color: var(--primary-pink);
+            text-shadow: 0 0 15px var(--primary-pink);
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 300;
+            letter-spacing: 4px;
+        }
+
+        /* Photo Gallery */
+        .gallery {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .photo-card {
+            width: 200px;
+            height: 250px;
+            border-radius: 15px;
+            border: 1px solid var(--primary-pink);
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 8px 32px 0 rgba(255, 45, 149, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .photo-card:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        /* Elegant Message Box */
+        .message-container {
+            max-width: 700px;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 45, 149, 0.4);
+            border-radius: 20px;
+            padding: 40px;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .message-container p {
+            font-size: 1.1rem;
+            color: #efefef;
+            margin-bottom: 20px;
+        }
+
+        .signature {
+            margin-top: 30px;
+            text-align: right;
+            font-weight: bold;
+            color: var(--primary-pink);
+            font-size: 1.2rem;
+        }
+
+        /* Spotify Widget */
+        .music-player {
+            width: 100%;
+            max-width: 700px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+
+        /* Responsive scaling for mobile */
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .message-container { padding: 25px; }
+            .photo-card { width: 140px; height: 180px; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="matrix"></canvas>
+
+    <div class="content">
+        <h1>Happy Birthday, Jasmine</h1>
+
+        <!-- GALLERY SECTION -->
+        <div class="gallery">
+            <!-- Replace the URLs between the quotes with your actual photo links -->
+            <div class="photo-card" style="background-image: url('YOUR_IMAGE_URL_1');"></div>
+            <div class="photo-card" style="background-image: url('YOUR_IMAGE_URL_2');"></div>
+            <div class="photo-card" style="background-image: url('YOUR_IMAGE_URL_3');"></div>
+        </div>
+
+        <!-- MESSAGE SECTION -->
+        <div class="message-container">
+            <p>Hey, happy birthday.</p>
+            <p>I honestly hope I'm the first to wish you. Even though things didn’t work out between us, I still want you to know I appreciate you a lot.</p>
+            <p>What we had meant something to me, and I’ll always appreciate the memories, the laughs, and even the little things we shared. Distance made things hard, but it never changed the fact that you’re a good person who deserves happiness.</p>
+            <p>I hope this new year of your life brings you peace, growth, and everything you’ve been working towards. You deserve love that feels easy, and a life that feels right.</p>
+            <p>Take care of yourself and enjoy your day.</p>
+            <div class="signature">Xoxo makumamutoffee ❤️</div>
+        </div>
+
+        <!-- SPOTIFY SECTION -->
+        <div class="music-player">
+            <!-- Replace 'YOUR_TRACK_ID' with the actual ID from your Spotify share link -->
+            <iframe style="border-radius:12px" src="https://spotify.com" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Customizing the matrix characters to include her name
+        const chars = "JASMINE0101HAPPYBIRTHDAY❤️✨";
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+
+        for (let x = 0; x < columns; x++) drops[x] = 1;
+
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#ff2d95'; // Glowing Pink
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars.charAt(Math.floor(Math.random() * chars.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(draw, 35);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
