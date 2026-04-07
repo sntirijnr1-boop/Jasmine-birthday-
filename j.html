@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Jasmine</title>
+
+<style>
+:root {
+    --primary-pink: #ff2d95;
+    --glass: rgba(15, 15, 15, 0.85);
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    background: black;
+    font-family: Arial, sans-serif;
+    color: white;
+    overflow-x: hidden;
+}
+
+/* Matrix */
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    opacity: 0.6;
+}
+
+/* Content */
+.container {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+h1 {
+    color: #ff2d95;
+    font-size: 2.5em;
+    text-shadow: 0 0 15px #ff2d95;
+}
+
+/* Gallery */
+.gallery {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 30px 0;
+}
+
+.gallery img {
+    width: 220px;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 15px;
+    border: 1px solid #ff2d95;
+    box-shadow: 0 0 15px rgba(255,45,149,0.5);
+}
+
+/* Message */
+.message {
+    background: var(--glass);
+    padding: 25px;
+    border-radius: 15px;
+    max-width: 700px;
+    margin: auto;
+    line-height: 1.6;
+}
+
+/* Spotify */
+.spotify {
+    margin-top: 30px;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="matrix"></canvas>
+
+<div class="container">
+<h1>Happy Birthday, Jasmine ❤️</h1>
+
+<div class="gallery">
+    <img src="Screenshot_20260407_204042_Gallery.jpg">
+    <img src="Snapchat-1475538738.jpg">
+    <img src="Snapchat-928657247.jpg">
+</div>
+
+<div class="message">
+Hey, happy birthday.
+
+I honestly hope I'm the first to wish you. Even though things didn’t work out between us, I still want you to know I appreciate you a lot.
+
+What we had meant something to me, and I’ll always appreciate the memories, the laughs, and even the little things we shared.
+
+I hope this new year of your life brings you peace, growth, and everything you’ve been working towards.
+
+Take care of yourself and enjoy your day.
+
+Xoxo, makumamutoffee ❤️
+</div>
+
+<div class="spotify">
+<iframe style="border-radius:12px"
+src="https://open.spotify.com/embed/track/4jyyma8YdFC4S4llusSFRu"
+width="100%" height="152"
+frameBorder="0"
+allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+</iframe>
+</div>
+
+</div>
+
+<script>
+const canvas = document.getElementById('matrix');
+const ctx = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const text = "HAPPY BIRTHDAY JASMINE ❤️✨";
+const fontSize = 14;
+const columns = canvas.width / fontSize;
+const drops = [];
+
+for (let i = 0; i < columns; i++) drops[i] = 1;
+
+function draw() {
+    ctx.fillStyle = 'rgba(0,0,0,0.05)';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    ctx.fillStyle = '#ff2d95';
+    ctx.font = fontSize + 'px monospace';
+
+    for (let i = 0; i < drops.length; i++) {
+        const char = text.charAt(Math.floor(Math.random() * text.length));
+        ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.95) {
+            drops[i] = 0;
+        }
+
+        drops[i]++;
+    }
+}
+
+setInterval(draw, 35);
+
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
+</script>
+
+</body>
+</html>
