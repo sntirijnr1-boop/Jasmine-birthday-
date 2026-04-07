@@ -1,357 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Jasmine 🎂</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 19th Jasmine</title>
+    <style>
+        :root {
+            --pink: #ff2d95;
+            --dark: #0a0a0a;
+        }
 
-<style>
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #ff758c, #ff7eb3);
-  overflow: hidden;
-  color: white;
-  text-align: center;
-}
+        body {
+            background-color: var(--dark);
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
 
-/* Intro screen */
-#intro {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: #ff758c;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
-  cursor: pointer;
-  font-size: 1.5rem;
-}
+        .header {
+            margin-top: 50px;
+            animation: fadeIn 2s;
+        }
 
-/* Main content */
-.container {
-  margin-top: 100px;
-  opacity: 0;
-  transition: 2s;
-}
+        h1 {
+            color: var(--pink);
+            font-size: 2.5rem;
+            text-shadow: 0 0 10px var(--pink);
+        }
 
-h1 {
-  font-size: 2.5rem;
-}
+        /* Image Gallery Layout */
+        .gallery {
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            padding: 20px;
+            width: 90%;
+            max-width: 800px;
+            scroll-behavior: smooth;
+        }
 
-p {
-  max-width: 400px;
-  margin: 10px auto;
-}
+        .gallery::-webkit-scrollbar { height: 5px; }
+        .gallery::-webkit-scrollbar-thumb { background: var(--pink); border-radius: 10px; }
 
-/* Button */
-button {
-  padding: 10px 20px;
-  border: none;
-  background: white;
-  color: #ff4d6d;
-  border-radius: 20px;
-  cursor: pointer;
-  margin-top: 20px;
-}
+        .photo {
+            flex: 0 0 250px;
+            height: 350px;
+            border-radius: 15px;
+            border: 2px solid var(--pink);
+            object-fit: cover;
+            box-shadow: 0 5px 15px rgba(255, 45, 149, 0.3);
+        }
 
-/* Floating hearts */
-.heart {
-  position: absolute;
-  color: pink;
-  animation: float 6s linear infinite;
-}
+        .message-box {
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px 20px;
+            line-height: 1.8;
+            border: 1px solid rgba(255, 45, 149, 0.2);
+        }
 
-@keyframes float {
-  0% {transform: translateY(100vh) scale(0);}
-  100% {transform: translateY(-10vh) scale(1);}
-}
-</style>
+        .spotify-container {
+            width: 90%;
+            max-width: 600px;
+            margin-bottom: 50px;
+        }
 
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
 </head>
-
 <body>
 
-<div id="intro" onclick="startExperience()">
-  Tap to open 💖
-</div>
+    <div class="header">
+        <h1>Happy Birthday, Jasmine</h1>
+        <p>19 years of being amazing</p>
+    </div>
 
-<div class="container" id="main">
+    <div class="gallery">
+        <img src="Snapchat-928657247.jpg" class="photo" alt="Jasmine 1">
+        <img src="Snapchat-1696790904.jpg" class="photo" alt="Jasmine 2">
+        <img src="Snapchat-1475538738.jpg" class="photo" alt="Jasmine 3">
+        </div>
 
-  <h1 id="typing"></h1>
+    <div class="message-box">
+        <p>Hey, happy birthday.</p>
+        <p>I honestly hope I'm the first to wish you. Even though things didn’t work out between us, I still want you to know I appreciate you a lot.</p>
+        <p>What we had meant something to me, and I’ll always appreciate the memories, the laughs, and even the little things we shared. Distance made things hard, but it never changed the fact that you’re a good person who deserves happiness.</p>
+        <p>I hope this new year of your life brings you peace, growth, and everything you’ve been working towards. You deserve love that feels easy, and a life that feels right.</p>
+        <p>Take care of yourself and enjoy your day.</p>
+        <p style="color: var(--pink); font-weight: bold;">Xoxo makumamutoffee ❤️</p>
+    </div>
 
-  <p>
-    Today is yours, Jasmine… and I hope you feel just how special you are 💫
-  </p>
-
-  <p>
-    You deserve happiness, peace, and everything good life has to offer.
-  </p>
-
-  <button onclick="reveal()">Click me 💌</button>
-
-  <p id="hidden" style="display:none;">
-    You mean more than you think… and I’m really glad you exist.  
-    Happy Birthday ❤️
-  </p>
-
-  <iframe style="margin-top:20px; border-radius:12px"
-    src="https://open.spotify.com/embed/track/4jyyma8YdFC4S4llusSFRu"
-    width="300" height="80" frameborder="0">
-  </iframe>
-
-</div>
-
-<script>
-// Start animation
-function startExperience() {
-  document.getElementById("intro").style.display = "none";
-  document.getElementById("main").style.opacity = "1";
-  typeText();
-  createHearts();
-}
-
-// Typing effect
-let text = "🎂 Happy Birthday Jasmine";
-let i = 0;
-
-function typeText() {
-  if (i < text.length) {
-    document.getElementById("typing").innerHTML += text.charAt(i);
-    i++;
-    setTimeout(typeText, 80);
-  }
-}
-
-// Reveal message + fireworks
-function reveal() {
-  document.getElementById("hidden").style.display = "block";
-  fireworks();
-}
-
-// Floating hearts generator
-function createHearts() {
-  setInterval(() => {
-    let heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "💖";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = Math.random() * 20 + 10 + "px";
-    document.body.appendChild(heart);
-
-    setTimeout(() => {
-      heart.remove();
-    }, 6000);
-  }, 300);
-}
-
-// Fireworks effect
-function fireworks() {
-  for (let i = 0; i < 20; i++) {
-    let spark = document.createElement("div");
-    spark.style.position = "absolute";
-    spark.style.width = "5px";
-    spark.style.height = "5px";
-    spark.style.background = "white";
-    spark.style.top = "50%";
-    spark.style.left = "50%";
-    spark.style.borderRadius = "50%";
-
-    let angle = Math.random() * 360;
-    let distance = Math.random() * 200;
-
-    spark.animate([
-      { transform: "translate(0,0)", opacity: 1 },
-      { transform: `translate(${Math.cos(angle)*distance}px, ${Math.sin(angle)*distance}px)`, opacity: 0 }
-    ], {
-      duration: 1000,
-      easing: "ease-out"
-    });
-
-    document.body.appendChild(spark);
-    setTimeout(() => spark.remove(), 1000);
-  }
-}
-</script>
-
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Jasmine 🎂</title>
-
-<style>
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #ff758c, #ff7eb3);
-  overflow: hidden;
-  color: white;
-  text-align: center;
-}
-
-/* Intro screen */
-#intro {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: #ff758c;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
-  cursor: pointer;
-  font-size: 1.5rem;
-}
-
-/* Main content */
-.container {
-  margin-top: 100px;
-  opacity: 0;
-  transition: 2s;
-}
-
-h1 {
-  font-size: 2.5rem;
-}
-
-p {
-  max-width: 400px;
-  margin: 10px auto;
-}
-
-/* Button */
-button {
-  padding: 10px 20px;
-  border: none;
-  background: white;
-  color: #ff4d6d;
-  border-radius: 20px;
-  cursor: pointer;
-  margin-top: 20px;
-}
-
-/* Floating hearts */
-.heart {
-  position: absolute;
-  color: pink;
-  animation: float 6s linear infinite;
-}
-
-@keyframes float {
-  0% {transform: translateY(100vh) scale(0);}
-  100% {transform: translateY(-10vh) scale(1);}
-}
-</style>
-
-</head>
-
-<body>
-
-<div id="intro" onclick="startExperience()">
-  Tap to open 💖
-</div>
-
-<div class="container" id="main">
-
-  <h1 id="typing"></h1>
-
-  <p>
-    Today is yours, Jasmine… and I hope you feel just how special you are 💫
-  </p>
-
-  <p>
-    You deserve happiness, peace, and everything good life has to offer.
-  </p>
-
-  <button onclick="reveal()">Click me 💌</button>
-
-  <p id="hidden" style="display:none;">
-    You mean more than you think… and I’m really glad you exist.  
-    Happy Birthday ❤️
-  </p>
-
-  <iframe style="margin-top:20px; border-radius:12px"
-    src="https://open.spotify.com/embed/track/4jyyma8YdFC4S4llusSFRu"
-    width="300" height="80" frameborder="0">
-  </iframe>
-
-</div>
-
-<script>
-// Start animation
-function startExperience() {
-  document.getElementById("intro").style.display = "none";
-  document.getElementById("main").style.opacity = "1";
-  typeText();
-  createHearts();
-}
-
-// Typing effect
-let text = "🎂 Happy Birthday Jasmine";
-let i = 0;
-
-function typeText() {
-  if (i < text.length) {
-    document.getElementById("typing").innerHTML += text.charAt(i);
-    i++;
-    setTimeout(typeText, 80);
-  }
-}
-
-// Reveal message + fireworks
-function reveal() {
-  document.getElementById("hidden").style.display = "block";
-  fireworks();
-}
-
-// Floating hearts generator
-function createHearts() {
-  setInterval(() => {
-    let heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "💖";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = Math.random() * 20 + 10 + "px";
-    document.body.appendChild(heart);
-
-    setTimeout(() => {
-      heart.remove();
-    }, 6000);
-  }, 300);
-}
-
-// Fireworks effect
-function fireworks() {
-  for (let i = 0; i < 20; i++) {
-    let spark = document.createElement("div");
-    spark.style.position = "absolute";
-    spark.style.width = "5px";
-    spark.style.height = "5px";
-    spark.style.background = "white";
-    spark.style.top = "50%";
-    spark.style.left = "50%";
-    spark.style.borderRadius = "50%";
-
-    let angle = Math.random() * 360;
-    let distance = Math.random() * 200;
-
-    spark.animate([
-      { transform: "translate(0,0)", opacity: 1 },
-      { transform: `translate(${Math.cos(angle)*distance}px, ${Math.sin(angle)*distance}px)`, opacity: 0 }
-    ], {
-      duration: 1000,
-      easing: "ease-out"
-    });
-
-    document.body.appendChild(spark);
-    setTimeout(() => spark.remove(), 1000);
-  }
-}
-</script>
+    <div class="spotify-container">
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/4Yv9979Y6CAnp6I89p99vP?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
 
 </body>
 </html>
