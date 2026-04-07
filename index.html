@@ -1,72 +1,146 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Birthday Jasmine 🎉</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-      color: #333;
-      text-align: center;
-    }
-    .container {
-      padding: 20px;
-    }
-    h1 {
-      color: #fff;
-      font-size: 2.5em;
-    }
-    .message {
-      background: #ffffffcc;
-      padding: 20px;
-      border-radius: 15px;
-      margin: 20px auto;
-      max-width: 700px;
-      line-height: 1.6;
-      white-space: pre-line;
-    }
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
-      margin-top: 20px;
-    }
-    .gallery img {
-      width: 100%;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
-    .spotify {
-      margin-top: 30px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Jasmine</title>
+
+<style>
+:root {
+    --primary-pink: #ff2d95;
+}
+
+body {
+    margin: 0;
+    background: black;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+/* Matrix Background */
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+/* Content */
+.content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 30px;
+}
+
+h1 {
+    color: #ff2d95;
+    font-size: 2.5rem;
+    text-shadow: 0 0 10px #ff2d95;
+}
+
+/* Photos */
+.gallery {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
+
+.photo {
+    width: 200px;
+    height: 250px;
+    border-radius: 15px;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #ff2d95;
+}
+
+/* Message */
+.message {
+    max-width: 600px;
+    margin: auto;
+    background: rgba(0,0,0,0.7);
+    padding: 25px;
+    border-radius: 15px;
+}
+
+.signature {
+    color: #ff2d95;
+    margin-top: 20px;
+}
+
+/* Spotify */
+iframe {
+    margin-top: 30px;
+    border-radius: 12px;
+}
+</style>
 </head>
+
 <body>
-  <div class="container">
-    <h1>Happy Birthday, Jasmine 🎂❤️</h1><div class="message">
 
-Hey, happy birthday. I honestly hope I'm the first to wish you. Even though things didn’t work out between us, I still want you to know I appreciate you a lot.
+<canvas id="matrix"></canvas>
 
-What we had meant something to me, and I’ll always appreciate the memories, the laughs, and even the little things we shared. Distance made things hard, but it never changed the fact that you’re a good person who deserves happiness.
+<div class="content">
+    <h1>Happy Birthday Jasmine ❤️</h1>
 
-I hope this new year of your life brings you peace, growth, and everything you’ve been working towards. You deserve love that feels easy, and a life that feels right.
+    <!-- PHOTOS -->
+    <div class="gallery">
+        <div class="photo" style="background-image:url('Snapchat-928657247.jpg')"></div>
+        <div class="photo" style="background-image:url('Snapchat-1475538738.jpg')"></div>
+        <div class="photo" style="background-image:url('Screenshot_20260407_204326_Gallery.jpg')"></div>
+    </div>
 
-Take care of yourself and enjoy your day.
+    <!-- MESSAGE -->
+    <div class="message">
+        <p>Hey, happy birthday.</p>
+        <p>I honestly hope I'm the first to wish you. Even though things didn’t work out between us, I still want you to know I appreciate you a lot.</p>
+        <p>What we had meant something to me, and I’ll always appreciate the memories, the laughs, and even the little things we shared. Distance made things hard, but it never changed the fact that you’re a good person who deserves happiness.</p>
+        <p>I hope this new year of your life brings you peace, growth, and everything you’ve been working towards. You deserve love that feels easy, and a life that feels right.</p>
+        <p>Take care of yourself and enjoy your day.</p>
+        <div class="signature">Xoxo makumamutoffee ❤️</div>
+    </div>
 
-Xoxo, makumamutoffee ❤️ </div>
-
-<div class="gallery">
-  <img src="Snapchat-928657247.jpg" alt="Jasmine Photo 1">
-  <img src="Snapchat-1475538738.jpg" alt="Jasmine Photo 2">
-  <img src="Screenshot_20260407_204326_Gallery.jpg" alt="Jasmine Photo 3">
+    <!-- SPOTIFY -->
+    <iframe src="https://open.spotify.com/embed/track/4jyyma8YdFC4S4llusSFRu" width="300" height="80" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 </div>
 
-<div class="spotify">
-  <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/4jyyma8YdFC4S4llusSFRu" width="300" height="380" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-</div>
+<script>
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
 
-  </div>
+canvas.height = window.innerHeight;
+canvas.width = window.innerWidth;
+
+const letters = "JASMINE❤️✨";
+const fontSize = 14;
+const columns = canvas.width / fontSize;
+
+const drops = [];
+for (let i = 0; i < columns; i++) drops[i] = 1;
+
+function draw() {
+    ctx.fillStyle = "rgba(0,0,0,0.05)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#ff2d95";
+    ctx.font = fontSize + "px monospace";
+
+    for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.95) {
+            drops[i] = 0;
+        }
+        drops[i]++;
+    }
+}
+
+setInterval(draw, 33);
+</script>
+
 </body>
 </html>
