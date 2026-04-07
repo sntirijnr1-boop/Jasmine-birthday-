@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Jasmine</title>
+    <style>
+        :root {
+            --primary-pink: #ff2d95;
+            --soft-pink: #ff85c1;
+            --glass: rgba(15, 15, 15, 0.85);
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            background-color: #000;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        #matrix {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            opacity: 0.6;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 60px 20px;
+            animation: fadeIn 2s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            color: var(--primary-pink);
+            text-shadow: 0 0 15px var(--primary-pink);
+            margin-bottom: 40px;
+            text-align: center;
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .gallery {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .photo-card {
+            width: 220px;
+            height: 280px;
+            border-radius: 15px;
+            border: 1px solid var(--primary-pink);
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 8px 32px 0 rgba(255, 45, 149, 0.4);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .photo-card:hover {
+            transform: scale(1.1) rotate(3deg);
+            z-index: 10;
+            box-shadow: 0 0 25px var(--primary-pink);
+        }
+
+        .message-container {
+            max-width: 700px;
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 45, 149, 0.3);
+            border-radius: 24px;
+            padding: 40px;
+            line-height: 1.9;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+        }
+
+        .message-container p {
+            font-size: 1.15rem;
+            color: #f0f0f0;
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+
+        .signature {
+            margin-top: 35px;
+            text-align: right;
+            font-weight: bold;
+            color: var(--primary-pink);
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+        }
+
+        .music-player {
+            width: 100%;
+            max-width: 700px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            margin-bottom: 50px;
+        }
+
+        @media (max-width: 600px) {
+            .message-container { padding: 30px; }
+            .photo-card { width: 160px; height: 210px; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="matrix"></canvas>
+
+    <div class="content">
+        <h1>Happy Birthday, Jasmine</h1>
+
+        <div class="gallery">
+            <div class="photo-card" style="background-image: url('Snapchat-928657247.jpg');"></div>
+            <div class="photo-card" style="background-image: url('Snapchat-1696790904.jpg');"></div>
+            <div class="photo-card" style="background-image: url('Snapchat-147558738.jpg');"></div>
+            <div class="photo-card" style="background-image: url('Snapchat-928657247.jpg');"></div>
+        </div>
+
+        <div class="message-container">
+            <p>Hey, happy birthday.</p>
+            <p>I honestly hope I'm the first to wish you. Even though things didn’t work out between us, I still want you to know I appreciate you a lot.</p>
+            <p>What we had meant something to me, and I’ll always appreciate the memories, the laughs, and even the little things we shared. Distance made things hard, but it never changed the fact that you’re a good person who deserves happiness.</p>
+            <p>I hope this new year of your life brings you peace, growth, and everything you’ve been working towards. You deserve love that feels easy, and a life that feels right.</p>
+            <p>Take care of yourself and enjoy your day.</p>
+            <div class="signature">Xoxo makumamutoffee ❤️</div>
+        </div>
+
+        <div class="music-player">
+            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/30unpL6R2F87mYg4K68l0K" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const chars = "JASMINE0101HAPPYBIRTHDAY❤️✨🦋";
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+
+        for (let x = 0; x < columns; x++) drops[x] = 1;
+
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#ff2d95'; 
+            ctx.font = fontSize + 'px monospace';
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars.charAt(Math.floor(Math.random() * chars.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+        setInterval(draw, 35);
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
